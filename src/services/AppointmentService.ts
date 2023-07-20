@@ -9,7 +9,7 @@ import type {
 const requiredFields = ["id", "date", "name", "service", "phone", "canceled"];
 
 const useAppointmentService = () => {
-	const _apiBase = "http://localhost:3000/appointments";
+	const _apiBase = "http://localhost:3001/appointments";
 
 	const { loadingStatus, request } = useHttp();
 
