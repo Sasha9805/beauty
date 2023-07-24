@@ -49,9 +49,11 @@ function AppointmentList() {
 	return (
 		<>
 			{appointmentItems}
-			{isOpen ? (
-				<CancelModal handleClose={setIsOpen} selectedId={selectedId} />
-			) : null}
+			<CancelModal
+				handleClose={setIsOpen}
+				selectedId={selectedId}
+				isOpen={isOpen}
+			/>
 		</>
 	);
 }
