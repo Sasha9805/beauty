@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import dayjs from "dayjs";
 import { Optional } from "utility-types";
 import { IAppointment } from "../../shared/interfaces/appointment.interface";
 import "./appointmentItem.scss";
 
 type AppointmentProps = Optional<IAppointment, "canceled"> & {
-	openModal: (state: boolean) => void;
-	selectId: () => void;
+	openModal: (id: number) => void;
 };
 
 function AppointmentItem({
@@ -17,7 +16,6 @@ function AppointmentItem({
 	service,
 	canceled,
 	openModal,
-	selectId,
 }: AppointmentProps) {
 	const [timeLeft, changeTimeLeft] = useState<string | null>(null);
 
@@ -58,10 +56,7 @@ function AppointmentItem({
 					</div>
 					<button
 						className="appointment__cancel"
-						onClick={() => {
-							openModal(true);
-							selectId();
-						}}
+						onClick={() => openModal(id)}
 					>
 						Cancel
 					</button>
@@ -74,4 +69,4 @@ function AppointmentItem({
 	);
 }
 
-export default AppointmentItem;
+export default memo(AppointmentItem);
