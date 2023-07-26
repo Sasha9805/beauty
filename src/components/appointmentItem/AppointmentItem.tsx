@@ -6,6 +6,7 @@ import "./appointmentItem.scss";
 
 type AppointmentProps = Optional<IAppointment, "canceled"> & {
 	openModal: (id: number) => void;
+	getActiveAppointments?: () => void;
 };
 
 function AppointmentItem({
@@ -16,6 +17,7 @@ function AppointmentItem({
 	service,
 	canceled,
 	openModal,
+	getActiveAppointments,
 }: AppointmentProps) {
 	const [timeLeft, changeTimeLeft] = useState<string | null>(null);
 
@@ -26,11 +28,18 @@ function AppointmentItem({
 			}`
 		);
 		const intervalId = setInterval(() => {
-			changeTimeLeft(
-				`${dayjs(date).diff(undefined, "h")}:${
-					dayjs(date).diff(undefined, "m") % 60
-				}`
-			);
+			if (dayjs(date).diff(undefined, "m") <= 0) {
+				if (getActiveAppointments) {
+					getActiveAppointments();
+				}
+				clearInterval(intervalId);
+			} else {
+				changeTimeLeft(
+					`${dayjs(date).diff(undefined, "h")}:${
+						dayjs(date).diff(undefined, "m") % 60
+					}`
+				);
+			}
 		}, 60000);
 
 		return () => {
