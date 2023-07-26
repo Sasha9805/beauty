@@ -25,11 +25,9 @@ function CancelModal({ selectedId, handleClose, isOpen }: IModalProps) {
 		setBtnDisabled(true);
 		cancelOneAppointment(id)
 			.then((res) => {
-				console.log(res, "done");
 				setCancelStatus(true);
 			})
 			.catch(() => {
-				console.log("error");
 				setCancelStatus(false);
 				setBtnDisabled(false);
 			});
