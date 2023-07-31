@@ -5,7 +5,7 @@ import { IAppointment } from "../../shared/interfaces/appointment.interface";
 import "./appointmentItem.scss";
 
 type AppointmentProps = Optional<IAppointment, "canceled"> & {
-	openModal: (id: number) => void;
+	openModal?: (id: number) => void;
 	getActiveAppointments?: () => void;
 };
 
@@ -57,7 +57,7 @@ function AppointmentItem({
 				<span className="appointment__service">Service: {service}</span>
 				<span className="appointment__phone">Phone: {phone}</span>
 			</div>
-			{!canceled ? (
+			{!canceled && openModal ? (
 				<>
 					<div className="appointment__time">
 						<span>Time left:</span>
