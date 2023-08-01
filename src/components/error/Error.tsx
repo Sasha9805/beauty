@@ -1,4 +1,12 @@
+// interface ErrorProps extends React.ComponentProps<"svg"> {
+// 	msg?: string;
+// }
+
+// function Error(props: ErrorProps) {
 function Error() {
+	// const { msg, ...rest } = props;
+	// console.log(msg);
+
 	return (
 		<svg
 			version="1.1"
@@ -10,6 +18,7 @@ function Error() {
 				display: "block",
 				margin: "0 auto",
 			}}
+			// {...rest}
 		>
 			<g id="cloud-rejected">
 				<g id="cloud-rejected_1_">
