@@ -5,12 +5,16 @@ import AppointmentItem from "../appointmentItem/AppointmentItem";
 import { AppointmentContext } from "../../context/appointments/AppointmentsContext";
 
 function HistoryList() {
-	const { getAppointments, appointmentLoadingStatus, allAppointments } =
-		useContext(AppointmentContext);
+	const {
+		getAppointments,
+		appointmentLoadingStatus,
+		allAppointments,
+		calendarDate,
+	} = useContext(AppointmentContext);
 
 	useEffect(() => {
 		getAppointments();
-	}, []);
+	}, [calendarDate]);
 
 	if (appointmentLoadingStatus === "loading") {
 		return <Spinner />;
@@ -31,6 +35,9 @@ function HistoryList() {
 
 	return (
 		<>
+			{sortedAppointments.length === 0 ? (
+				<h2 className="no-data">No data to display</h2>
+			) : null}
 			{sortedAppointments.map((item) => (
 				<AppointmentItem key={item.id} {...item} />
 			))}

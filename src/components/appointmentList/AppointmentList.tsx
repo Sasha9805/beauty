@@ -9,6 +9,7 @@ function AppointmentList() {
 	const {
 		appointmentLoadingStatus,
 		activeAppointments,
+		calendarDate,
 		getActiveAppointments,
 	} = useContext(AppointmentContext);
 
@@ -17,7 +18,7 @@ function AppointmentList() {
 
 	useEffect(() => {
 		getActiveAppointments();
-	}, []);
+	}, [calendarDate]);
 
 	const handleOpenModal = useCallback((id: number) => {
 		setIsOpen(true);
@@ -30,16 +31,16 @@ function AppointmentList() {
 		return (
 			<>
 				<Error
-					// version="1.1"
-					// viewBox="0 0 499.973 391.157"
-					// xmlns="http://www.w3.org/2000/svg"
-					// style={{
-					// 	width: "100px",
-					// 	height: "100px",
-					// 	display: "block",
-					// 	margin: "0 auto",
-					// }}
-					// msg={appointmentLoadingStatus}
+				// version="1.1"
+				// viewBox="0 0 499.973 391.157"
+				// xmlns="http://www.w3.org/2000/svg"
+				// style={{
+				// 	width: "100px",
+				// 	height: "100px",
+				// 	display: "block",
+				// 	margin: "0 auto",
+				// }}
+				// msg={appointmentLoadingStatus}
 				/>
 				<button
 					className="schedule__reload"
@@ -64,6 +65,9 @@ function AppointmentList() {
 
 	return (
 		<>
+			{activeAppointments.length === 0 ? (
+				<h2 className="no-data">No data to display</h2>
+			) : null}
 			{appointmentItems}
 			<CancelModal
 				handleClose={setIsOpen}
